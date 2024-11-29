@@ -1,22 +1,22 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { fetchMessage } from './ApiService';
 import './App.css';
 
 function App() {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const getMessage = async () => {
+      const msg = await fetchMessage();
+      setMessage(msg);
+    };
+    getMessage();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>{message}</p>
       </header>
     </div>
   );
